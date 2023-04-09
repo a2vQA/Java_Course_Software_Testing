@@ -1,6 +1,12 @@
 .gradle
 build/
 .idea/workspace.xml
+.tmp
+caches
+daemon
+jdks
+native
+wrapper
 
 # Ignore Gradle GUI config
 gradle-app.setting
