@@ -1,26 +1,35 @@
 package ru.stqa.javaCourse.sandbox;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 public class PointTests {
 
     @Test
-    public void testDistance(){
-        Point mixedPoints = new Point(-1.0, 4.0, 6.0, -2.0);
-        Assert.assertEquals(mixedPoints.distance(), "Расстояние между точкой на координате (-1.0;4.0) и" +
-                " точкой (6.0;-2.0) = 9,219544");
+    public void testDistanceMixed() {
+        Point p1 = new Point(4.0, 6.0);
+        Point p2 = new Point(-5.0, -1.0);
+        Assert.assertEquals(p1.distanceMethod(p2), 11.401754);
+    }
 
-        Point negativePoints = new Point(-15.0, -13.0, -13.0, -15.0);
-        Assert.assertEquals(negativePoints.distance(), "Расстояние между точкой на координате (-15.0;-13.0)" +
-                " и точкой (-13.0;-15.0) = 2,828427");
+    @Test
+    public void testDistanceNegative() {
+        Point p1 = new Point(-2.0, -5.0);
+        Point p2 = new Point(-5.0, -2.0);
+        Assert.assertEquals(p1.distanceMethod(p2), 4.242641);
+    }
 
-        Point positivePoints = new Point(125.0, 123.0, 123.0, 125.0);
-        Assert.assertEquals(positivePoints.distance(), "Расстояние между точкой на координате (125.0;123.0)" +
-                " и точкой (123.0;125.0) = 2,828427");
+    @Test
+    public void testDistancePositive() {
+        Point p1 = new Point(4.0, 6.0);
+        Point p2 = new Point(6.0, 4.0);
+        Assert.assertEquals(p1.distanceMethod(p2), 2.828427);
+    }
 
-        Point zeroPoints = new Point(0, 0, 0, 0);
-        Assert.assertEquals(zeroPoints.distance(), "Расстояние между точкой на координате (0.0;0.0) и" +
-                " точкой (0.0;0.0) = 0,000000");
+    @Test
+    public void testDistanceZero() {
+        Point p1 = new Point(0, 0);
+        Point p2 = new Point(0, 0);
+        Assert.assertEquals(p1.distanceMethod(p2), 0);
     }
 }
