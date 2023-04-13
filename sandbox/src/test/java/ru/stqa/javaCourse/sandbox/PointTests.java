@@ -9,21 +9,21 @@ public class PointTests {
     public void testDistanceMixed() {
         Point p1 = new Point(4.0, 6.0);
         Point p2 = new Point(-5.0, -1.0);
-        Assert.assertEquals(p1.distanceMethod(p2), 11.401754);
+        Assert.assertEquals(p1.distanceMethod(p2), 11.40175425099138);
     }
 
     @Test
     public void testDistanceNegative() {
         Point p1 = new Point(-2.0, -5.0);
         Point p2 = new Point(-5.0, -2.0);
-        Assert.assertEquals(p1.distanceMethod(p2), 4.242641);
+        Assert.assertEquals(p1.distanceMethod(p2), 4.242640687119285);
     }
 
     @Test
     public void testDistancePositive() {
         Point p1 = new Point(4.0, 6.0);
         Point p2 = new Point(6.0, 4.0);
-        Assert.assertEquals(p1.distanceMethod(p2), 2.828427);
+        Assert.assertEquals(p1.distanceMethod(p2), 2.8284271247461903);
     }
 
     @Test
