@@ -19,6 +19,12 @@ public class GroupCreationTests {
     login("admin", "secret");
   }
 
+  private void login(String username, String password) {
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
   @Test
   public void testGroupCreation() throws Exception {
     goToGroupPage();
@@ -27,12 +33,6 @@ public class GroupCreationTests {
     submitGroupCreation();
     returnToGroupPage();
     logout();
-  }
-
-  private void login(String username, String password) {
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   private void goToGroupPage() {
