@@ -16,20 +16,48 @@ public class GroupCreationTests {
   public void setUp() throws Exception {
     wd = new ChromeDriver();
     wd.get("http://localhost/addressbook/");
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
+    login("admin", "secret");
   }
 
   @Test
   public void testGroupCreation() throws Exception {
+    goToGroupPage();
+    initGroupCreation();
+    fillGroupForm(new GroupData("test1", "test2", "test3"));
+    submitGroupCreation();
+    returnToGroupPage();
+    logout();
+  }
+
+  private void login(String username, String password) {
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  private void goToGroupPage() {
     wd.findElement(By.linkText("groups")).click();
+  }
+
+  private void initGroupCreation() {
     wd.findElement(By.name("new")).click();
-    wd.findElement(By.name("group_name")).sendKeys("test1");
-    wd.findElement(By.name("group_header")).sendKeys("test2");
-    wd.findElement(By.name("group_footer")).sendKeys("test3");
+  }
+
+  private void fillGroupForm(GroupData groupData) {
+    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
+    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+  }
+
+  private void submitGroupCreation() {
     wd.findElement(By.name("submit")).click();
+  }
+
+  private void returnToGroupPage() {
     wd.findElement(By.linkText("group page")).click();
+  }
+
+  private void logout() {
     wd.findElement(By.linkText("Logout")).click();
   }
 
