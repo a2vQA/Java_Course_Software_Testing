@@ -10,7 +10,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class GroupCreationTests {
-  private GroupData groupData;
   private WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
@@ -30,7 +29,8 @@ public class GroupCreationTests {
   public void testGroupCreation() throws Exception {
     goToGroupPage();
     initGroupCreation();
-    fillGroupForm(new GroupData("test1", "test2", "test3"));
+    GroupData groupData = new GroupData("test1", "test2", "test3");
+    fillGroupForm(groupData);
     submitGroupCreation();
     returnToGroupPage();
     wd.findElement(By.xpath("//*[text()=" + "'" + groupData.getName() + "']")).isDisplayed();
