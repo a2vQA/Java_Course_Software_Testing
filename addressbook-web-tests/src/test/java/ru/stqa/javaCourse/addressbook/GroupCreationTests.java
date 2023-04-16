@@ -9,6 +9,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static java.lang.String.format;
+
 public class GroupCreationTests {
   private WebDriver wd;
 
@@ -33,7 +35,7 @@ public class GroupCreationTests {
     fillGroupForm(groupData);
     submitGroupCreation();
     returnToGroupPage();
-    wd.findElement(By.xpath("//*[text()=" + "'" + groupData.getName() + "']")).isDisplayed();
+    wd.findElement(By.xpath(format("//span[last()][text()='%s']", groupData.getName()))).isDisplayed();
     logout();
   }
 
