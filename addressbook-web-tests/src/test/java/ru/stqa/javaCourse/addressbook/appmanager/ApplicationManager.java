@@ -3,8 +3,6 @@ package ru.stqa.javaCourse.addressbook.appmanager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static java.lang.String.format;
-
 public class ApplicationManager {
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;

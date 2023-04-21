@@ -1,13 +1,8 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import ru.stqa.javaCourse.addressbook.appmanager.ApplicationManager;
-import ru.stqa.javaCourse.addressbook.model.ContactData;
-
-import static java.lang.String.format;
 
 public class BaseTest {
 
@@ -22,5 +17,4 @@ public class BaseTest {
     public void tearDown() throws Exception {
         app.stop();
     }
-
 }

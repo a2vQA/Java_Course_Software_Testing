@@ -2,7 +2,7 @@ package ru.stqa.javaCourse.addressbook.tests;
 
 import org.testng.annotations.Test;
 
-public class GroupDeletionTests extends BaseTest{
+public class GroupDeletionTests extends BaseTest {
 
     @Test
     public void testGroupDeletion() throws Exception {
@@ -11,5 +11,4 @@ public class GroupDeletionTests extends BaseTest{
         app.getGroupHelper().deleteSelectedGroups();
         app.getGroupHelper().returnToGroupPage();
     }
-
 }

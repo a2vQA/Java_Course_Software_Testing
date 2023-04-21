@@ -6,34 +6,33 @@ import ru.stqa.javaCourse.addressbook.model.ContactData;
 
 import static java.lang.String.format;
 
-public class ContactHelper {
-    WebDriver wd;
+public class ContactHelper extends BaseHelper {
 
     public ContactHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void initContactCreation() {
-        wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
     }
 
     public void fillContactFormRequiredFields(ContactData contactData) {
-        wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
-        wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
-        wd.findElement(By.name("address")).sendKeys(contactData.getAddress());
-        wd.findElement(By.name("mobile")).sendKeys(contactData.getMobilePhone());
-        wd.findElement(By.name("email")).sendKeys(contactData.getPrimaryEmail());
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("email"), contactData.getPrimaryEmail());
     }
 
     public void submitContactCreation() {
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
     public void checkerForContactExists(ContactData contactData) {
-        wd.findElement(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getLastName()))).isDisplayed();
-        wd.findElement(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getFirstName()))).isDisplayed();
-        wd.findElement(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getAddress()))).isDisplayed();
-        wd.findElement(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getMobilePhone()))).isDisplayed();
-        wd.findElement(By.xpath(format("//tbody//tr[last()]//a[text()='%s']", contactData.getPrimaryEmail()))).isDisplayed();
+        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getLastName())));
+        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getFirstName())));
+        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getAddress())));
+        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getMobilePhone())));
+        isDisplayed(By.xpath(format("//tbody//tr[last()]//a[text()='%s']", contactData.getPrimaryEmail())));
     }
 }
