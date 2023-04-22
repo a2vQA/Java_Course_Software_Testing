@@ -31,4 +31,9 @@ public class BaseHelper {
             return false;
         }
     }
+
+    protected void doubleTextInField(By locator, String nameOfAttribute) {
+        String originalText = wd.findElement(locator).getAttribute(nameOfAttribute);
+        wd.findElement(locator).sendKeys(originalText);
+    }
 }

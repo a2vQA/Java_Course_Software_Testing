@@ -16,6 +16,6 @@ public class GroupCreationTests extends BaseTest {
         app.getGroupHelper().fillGroupForm(groupData);
         app.getGroupHelper().submitGroupCreation();
         app.getGroupHelper().returnToGroupPage();
-        app.wd.findElement(By.xpath(format("//span[last()][text()='%s']", groupData.getName()))).isDisplayed();
+        app.wd.findElement(By.xpath(format("//span[text()='%s'][last()]", groupData.getName()))).isDisplayed();
     }
 }

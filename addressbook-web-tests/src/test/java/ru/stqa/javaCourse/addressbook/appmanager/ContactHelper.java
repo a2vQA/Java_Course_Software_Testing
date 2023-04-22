@@ -30,9 +30,25 @@ public class ContactHelper extends BaseHelper {
 
     public void checkerForContactExists(ContactData contactData) {
         isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getLastName())));
-        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getFirstName())));
+        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s'][last()]", contactData.getFirstName())));
         isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getAddress())));
         isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getMobilePhone())));
         isDisplayed(By.xpath(format("//tbody//tr[last()]//a[text()='%s']", contactData.getPrimaryEmail())));
+    }
+
+    public void initContactModification(String email) {
+        click(By.xpath(format("//tbody//tr//a[text()='%s']/../..//*[@title='Edit']", email)));
+    }
+
+    public void modifyPrimaryFields(By locator) {
+        doubleTextInField(locator, "value");
+    }
+
+    public void updateContactModification() {
+        click(By.name("update"));
+    }
+
+    public void deleteContact() {
+        click(By.xpath("//*[@value='Delete']"));
     }
 }

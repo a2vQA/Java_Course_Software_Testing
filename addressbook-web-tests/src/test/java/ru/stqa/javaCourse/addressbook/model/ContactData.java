@@ -1,10 +1,10 @@
 package ru.stqa.javaCourse.addressbook.model;
 
 public class ContactData {
-    private final String firstName;
-    private final String lastName;
-    private final String address;
-    private final String mobilePhone;
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String mobilePhone;
     private final String primaryEmail;
 
     // constructor for required params
@@ -13,6 +13,11 @@ public class ContactData {
         this.lastName = lastName;
         this.address = address;
         this.mobilePhone = mobilePhone;
+        this.primaryEmail = primaryEmail;
+    }
+
+    // constructor for primaryEmail field
+    public ContactData(String primaryEmail) {
         this.primaryEmail = primaryEmail;
     }
 
