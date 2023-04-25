@@ -36,8 +36,8 @@ public class ContactHelper extends BaseHelper {
         isDisplayed(By.xpath(format("//tbody//tr[last()]//a[text()='%s']", contactData.getPrimaryEmail())));
     }
 
-    public void initContactModification(String email) {
-        click(By.xpath(format("//tbody//tr//a[text()='%s']/../..//*[@title='Edit']", email)));
+    public void initContactModification() {
+        click(By.xpath("(//img[last()][@title='Edit'])[1]"));
     }
 
     public void modifyPrimaryFields(By locator) {
