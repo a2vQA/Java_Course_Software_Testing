@@ -19,6 +19,10 @@ public class BaseHelper {
         wd.findElement(locator).click();
     }
 
+    protected void clear(By locator) {
+        wd.findElement(locator).clear();
+    }
+
     protected void isDisplayed(By locator) {
         wd.findElement(locator).isDisplayed();
     }
@@ -30,10 +34,5 @@ public class BaseHelper {
         } catch (NoAlertPresentException e) {
             return false;
         }
-    }
-
-    protected void doubleTextInField(By locator, String nameOfAttribute) {
-        String originalText = wd.findElement(locator).getAttribute(nameOfAttribute);
-        wd.findElement(locator).sendKeys(originalText);
     }
 }
