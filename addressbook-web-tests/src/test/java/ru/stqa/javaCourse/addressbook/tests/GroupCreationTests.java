@@ -11,11 +11,8 @@ public class GroupCreationTests extends BaseTest {
     @Test
     public void testGroupCreation() throws Exception {
         app.getNavigationHelper().goToGroupPage();
-        app.getGroupHelper().initGroupCreation();
         GroupData groupData = new GroupData("test1", "test2", "test3");
-        app.getGroupHelper().fillGroupForm(groupData);
-        app.getGroupHelper().submitGroupCreation();
-        app.getGroupHelper().returnToGroupPage();
-        app.wd.findElement(By.xpath(format("//span[text()='%s'][last()]", groupData.getName()))).isDisplayed();
+        app.getGroupHelper().createGroup(groupData);
+        app.wd.findElement(By.xpath(format("//span[text()='%s']", groupData.getName()))).isDisplayed();
     }
 }
