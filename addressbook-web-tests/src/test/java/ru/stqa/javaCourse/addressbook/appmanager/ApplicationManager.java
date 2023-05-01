@@ -6,6 +6,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
 
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
     private final String browser;
     private ContactHelper contactHelper;
@@ -26,6 +29,7 @@ public class ApplicationManager {
         } else if (browser.equals(Browser.EDGE.browserName())){
             wd = new EdgeDriver();
         }
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         wd.get("http://localhost/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);

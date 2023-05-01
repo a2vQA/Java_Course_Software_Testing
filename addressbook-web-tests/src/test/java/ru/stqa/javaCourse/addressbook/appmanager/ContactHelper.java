@@ -2,6 +2,8 @@ package ru.stqa.javaCourse.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
 
 import static java.lang.String.format;
@@ -16,12 +18,18 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
     }
 
-    public void fillContactFormRequiredFields(ContactData contactData) {
+    public void fillContactFormRequiredFields(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getLastName());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobilePhone());
         type(By.name("email"), contactData.getPrimaryEmail());
+
+        if(creation){
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void submitContactCreation() {
@@ -29,11 +37,11 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void checkerForContactExists(ContactData contactData) {
-        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getLastName())));
-        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s'][last()]", contactData.getFirstName())));
-        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getAddress())));
-        isDisplayed(By.xpath(format("//tbody/tr[last()]/td[text()='%s']", contactData.getMobilePhone())));
-        isDisplayed(By.xpath(format("//tbody//tr[last()]//a[text()='%s']", contactData.getPrimaryEmail())));
+        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s']", contactData.getLastName())));
+        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s']", contactData.getFirstName())));
+        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s']", contactData.getAddress())));
+        isDisplayed(By.xpath(format("//tbody/tr/td[text()='%s']", contactData.getMobilePhone())));
+        isDisplayed(By.xpath(format("//tbody//tr//a[text()='%s']", contactData.getPrimaryEmail())));
     }
 
     public void initContactModification() {

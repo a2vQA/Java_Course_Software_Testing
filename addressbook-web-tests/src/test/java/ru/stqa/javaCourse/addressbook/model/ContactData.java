@@ -6,14 +6,16 @@ public class ContactData {
     private String address;
     private String mobilePhone;
     private final String primaryEmail;
+    private String group;
 
     // constructor for required params
-    public ContactData(String firstName, String lastName, String address, String mobilePhone, String primaryEmail) {
+    public ContactData(String firstName, String lastName, String address, String mobilePhone, String primaryEmail, String group) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.mobilePhone = mobilePhone;
         this.primaryEmail = primaryEmail;
+        this.group = group;
     }
 
     // constructor for primaryEmail field
@@ -39,5 +41,9 @@ public class ContactData {
 
     public String getPrimaryEmail() {
         return primaryEmail;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }
