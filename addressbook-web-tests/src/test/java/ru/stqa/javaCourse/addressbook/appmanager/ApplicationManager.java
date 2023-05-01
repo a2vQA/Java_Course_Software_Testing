@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     private final String browser;
