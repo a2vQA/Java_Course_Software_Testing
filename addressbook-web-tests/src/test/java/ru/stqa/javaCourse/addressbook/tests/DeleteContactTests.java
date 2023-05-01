@@ -7,15 +7,19 @@ public class DeleteContactTests extends BaseTest {
 
     @Test
     public void testDeleteContact() throws Exception {
-        if (! app.getContactHelper().isThereAnyContact()){
-            app.getContactHelper().createContact(new ContactData("Vladislav",
-                                                        "Artyomenko",
-                                                        "Moscow",
-                                                        "+79999999999",
-                                                        "javaCourse@test.ru",
-                                                        "test1"));
-        }
+        checkForContactToExist();
         app.getContactHelper().initContactModification();
         app.getContactHelper().deleteContact();
+    }
+
+    public void checkForContactToExist(){
+        if (! app.getContactHelper().isThereAnyContact()){
+            app.getContactHelper().createContact(new ContactData("Vladislav",
+                    "Artyomenko",
+                    "Moscow",
+                    "+79999999999",
+                    "javaCourse@test.ru",
+                    "test1"));
+        }
     }
 }
