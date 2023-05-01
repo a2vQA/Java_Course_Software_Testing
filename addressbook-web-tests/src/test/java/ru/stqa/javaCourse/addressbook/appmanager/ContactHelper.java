@@ -40,11 +40,6 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("(//img[last()][@title='Edit'])[1]"));
     }
 
-    public void modifyFieldInContact(By locator, String value) {
-        clear(locator);
-        type(locator, value);
-    }
-
     public void updateContactModification() {
         click(By.name("update"));
     }
