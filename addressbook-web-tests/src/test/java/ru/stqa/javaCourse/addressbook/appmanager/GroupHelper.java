@@ -58,4 +58,8 @@ public class GroupHelper extends BaseHelper {
     public boolean isThereAnyGroup() {
         return isElementPresent(By.name("selected[]"));
     }
+
+    public boolean isThereAnyGroupInContactCreation() {
+        return isElementPresent(By.xpath("//select[@name='new_group']/option[2]"));
+    }
 }

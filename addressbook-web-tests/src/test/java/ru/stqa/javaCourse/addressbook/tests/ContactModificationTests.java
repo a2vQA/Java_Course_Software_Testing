@@ -9,7 +9,7 @@ public class ContactModificationTests extends BaseTest {
     public void testContactModification() throws Exception {
         checkForContactToExist();
         app.getContactHelper().initContactModification();
-        ContactData changedContactData = new ContactData("VladislavModified", "ArtyomenkoModified", "MoscowModified", "+79999999998", "javaCourseModified@test.ru", null);
+        ContactData changedContactData = new ContactData("VladislavModified", "ArtyomenkoModified", "MoscowModified", "+79999999998", "javaCourseModified@test.ru");
         app.getContactHelper().fillContactFormRequiredFields(changedContactData, false);
         app.getContactHelper().updateContactModification();
         app.getNavigationHelper().goToHomePage();
@@ -21,8 +21,7 @@ public class ContactModificationTests extends BaseTest {
                     "Artyomenko",
                     "Moscow",
                     "+79999999999",
-                    "javaCourse@test.ru",
-                    "test1"));
+                    "javaCourse@test.ru"));
         }
     }
 }

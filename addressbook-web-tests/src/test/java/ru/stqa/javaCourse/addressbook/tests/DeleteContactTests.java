@@ -18,8 +18,7 @@ public class DeleteContactTests extends BaseTest {
                     "Artyomenko",
                     "Moscow",
                     "+79999999999",
-                    "javaCourse@test.ru",
-                    "test1"));
+                    "javaCourse@test.ru"));
         }
     }
 }

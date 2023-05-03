@@ -26,7 +26,7 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email"), contactData.getPrimaryEmail());
 
         if(creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -57,7 +57,6 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void createContact(ContactData contactData) {
-        initContactCreation();
         fillContactFormRequiredFields(contactData, true);
         submitContactCreation();
         returnToHomePage();
