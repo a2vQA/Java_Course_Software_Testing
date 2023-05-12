@@ -62,4 +62,8 @@ public class GroupHelper extends BaseHelper {
     public boolean isThereAnyGroupInContactCreation() {
         return isElementPresent(By.xpath("//select[@name='new_group']/option[2]"));
     }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
 }
