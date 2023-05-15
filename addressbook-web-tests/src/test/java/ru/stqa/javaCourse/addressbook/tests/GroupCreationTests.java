@@ -8,7 +8,6 @@ import ru.stqa.javaCourse.addressbook.model.GroupData;
 import java.util.Comparator;
 import java.util.List;
 
-import static java.lang.CharSequence.compare;
 import static java.lang.String.format;
 
 public class GroupCreationTests extends BaseTest {
@@ -24,9 +23,9 @@ public class GroupCreationTests extends BaseTest {
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(groupData);
-        Comparator<? super GroupData> byName = (g1, g2) -> compare(g1.getName(), g2.getName());
-        before.sort(byName);
-        after.sort(byName);
+        Comparator<? super GroupData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        before.sort(byId);
+        after.sort(byId);
         Assert.assertEquals(before, after);
     }
 }

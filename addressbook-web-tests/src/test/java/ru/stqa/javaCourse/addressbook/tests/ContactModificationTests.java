@@ -17,6 +17,7 @@ public class ContactModificationTests extends BaseTest {
 
     public void checkForContactToExist(){
         if (! app.getContactHelper().isThereAnyContact()){
+            app.getContactHelper().initContactCreation();
             app.getContactHelper().createContact(new ContactData("Vladislav",
                     "Artyomenko",
                     "Moscow",
