@@ -2,9 +2,14 @@ package ru.stqa.javaCourse.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
+import ru.stqa.javaCourse.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -44,8 +49,8 @@ public class ContactHelper extends BaseHelper {
         isDisplayed(By.xpath(format("//tbody//tr//a[text()='%s']", contactData.getPrimaryEmail())));
     }
 
-    public void initContactModification() {
-        click(By.xpath("(//img[last()][@title='Edit'])[1]"));
+    public void initContactModification(int index) {
+        wd.findElements(By.cssSelector("[title='Edit']")).get(index).click();
     }
 
     public void updateContactModification() {
@@ -68,5 +73,22 @@ public class ContactHelper extends BaseHelper {
 
     public void returnToHomePage() {
         click(By.linkText("home page"));
+    }
+
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.xpath("//*[@name='entry']"));
+        for (WebElement element : elements) {
+            String lastName = element.findElement(By.xpath("td[2]")).getText();
+            String firstName = element.findElement(By.xpath("td[3]")).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(firstName, lastName, null, null, null, id);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
