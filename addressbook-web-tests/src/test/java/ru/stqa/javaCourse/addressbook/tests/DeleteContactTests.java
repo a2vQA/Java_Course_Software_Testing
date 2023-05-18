@@ -25,6 +25,11 @@ public class DeleteContactTests extends BaseTest {
 
     public void checkForContactToExist(){
         if (! app.getContactHelper().isThereAnyContact()){
+            app.getNavigationHelper().goToGroupPage();
+            if (! app.getGroupHelper().isThereAnyGroup()){
+                app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+            }
+            app.getNavigationHelper().goToHomePage();
             app.getContactHelper().initContactCreation();
             app.getContactHelper().createContact(new ContactData("Vladislav",
                     "Artyomenko",

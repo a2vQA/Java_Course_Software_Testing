@@ -12,7 +12,7 @@ public class ContactModificationTests extends BaseTest {
 
     @Test
     public void testContactModification() throws Exception {
-        checkForContactToExist();
+        checkForContactAndGroupToExist();
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initContactModification(before.size() - 1);
         ContactData changedContactData = new ContactData("VladislavModified", "ArtyomenkoModified",
@@ -30,8 +30,13 @@ public class ContactModificationTests extends BaseTest {
         Assert.assertEquals(before, after);
     }
 
-    public void checkForContactToExist(){
+    public void checkForContactAndGroupToExist(){
         if (! app.getContactHelper().isThereAnyContact()){
+            app.getNavigationHelper().goToGroupPage();
+            if (! app.getGroupHelper().isThereAnyGroup()){
+                app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+            }
+            app.getNavigationHelper().goToHomePage();
             app.getContactHelper().initContactCreation();
             app.getContactHelper().createContact(new ContactData("Vladislav",
                     "Artyomenko",
