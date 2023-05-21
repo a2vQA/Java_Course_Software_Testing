@@ -10,13 +10,13 @@ import java.util.List;
 public class DeleteContactTests extends BaseTest {
 
     @Test
-    public void testDeleteContact() throws Exception {
+    public void testDeleteContact() {
         checkForContactToExist();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactModification(before.size() - 1);
-        app.getContactHelper().deleteContact();
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        app.contact().initContactModification(before.size() - 1);
+        app.contact().deleteContact();
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() - 1);
 
         before.remove(before.size() - 1);
@@ -24,14 +24,14 @@ public class DeleteContactTests extends BaseTest {
     }
 
     public void checkForContactToExist(){
-        if (! app.getContactHelper().isThereAnyContact()){
-            app.getNavigationHelper().goToGroupPage();
-            if (! app.getGroupHelper().isThereAnyGroup()){
-                app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+        if (app.contact().list().size() == 0){
+            app.goTo().groupPage();
+            if (app.group().list().size() == 0){
+                app.group().create(new GroupData("test1", "test2", "test3"));
             }
-            app.getNavigationHelper().goToHomePage();
-            app.getContactHelper().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("Vladislav",
+            app.goTo().homePage();
+            app.contact().initContactCreation();
+            app.contact().createContact(new ContactData("Vladislav",
                     "Artyomenko",
                     "Moscow",
                     "+79999999999",

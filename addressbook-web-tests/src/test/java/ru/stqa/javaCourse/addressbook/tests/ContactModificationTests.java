@@ -11,16 +11,15 @@ import java.util.List;
 public class ContactModificationTests extends BaseTest {
 
     @Test
-    public void testContactModification() throws Exception {
+    public void testContactModification() {
         checkForContactAndGroupToExist();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initContactModification(before.size() - 1);
+        List<ContactData> before = app.contact().list();
+        int index = before.size() - 1;
         ContactData changedContactData = new ContactData("VladislavModified", "ArtyomenkoModified",
-                "MoscowModified", "+79999999998", "javaCourseModified@test.ru", before.get(before.size() - 1).getId());
-        app.getContactHelper().fillContactFormRequiredFields(changedContactData, false);
-        app.getContactHelper().updateContactModification();
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+                "MoscowModified", "+79999999998", "javaCourseModified@test.ru", before.get(index).getId());
+        app.contact().modify(index, changedContactData);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
 
         before.remove(before.size() - 1);
         before.add(changedContactData);
@@ -31,14 +30,14 @@ public class ContactModificationTests extends BaseTest {
     }
 
     public void checkForContactAndGroupToExist(){
-        if (! app.getContactHelper().isThereAnyContact()){
-            app.getNavigationHelper().goToGroupPage();
-            if (! app.getGroupHelper().isThereAnyGroup()){
-                app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
+        if (app.contact().list().size() == 0){
+            app.goTo().groupPage();
+            if (app.group().list().size() == 0){
+                app.group().create(new GroupData("test1", "test2", "test3"));
             }
-            app.getNavigationHelper().goToHomePage();
-            app.getContactHelper().initContactCreation();
-            app.getContactHelper().createContact(new ContactData("Vladislav",
+            app.goTo().homePage();
+            app.contact().initContactCreation();
+            app.contact().createContact(new ContactData("Vladislav",
                     "Artyomenko",
                     "Moscow",
                     "+79999999999",

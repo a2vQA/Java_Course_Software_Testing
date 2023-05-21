@@ -1,21 +1,21 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
 import org.openqa.selenium.remote.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import ru.stqa.javaCourse.addressbook.appmanager.ApplicationManager;
 
 public class BaseTest {
 
-    protected final ApplicationManager app = new ApplicationManager(Browser.CHROME.browserName());
+    protected static final ApplicationManager app = new ApplicationManager(Browser.CHROME.browserName());
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
+    @BeforeSuite(alwaysRun = true)
+    public void setUp() {
         app.init();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
+    @AfterSuite(alwaysRun = true)
+    public void tearDown() {
         app.stop();
     }
 }

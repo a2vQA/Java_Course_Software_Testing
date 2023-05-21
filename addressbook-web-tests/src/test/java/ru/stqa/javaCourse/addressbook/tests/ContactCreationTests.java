@@ -11,14 +11,14 @@ import java.util.List;
 public class ContactCreationTests extends BaseTest {
 
     @Test
-    public void testContactCreation() throws Exception {
-        List<ContactData> before = app.getContactHelper().getContactList();
+    public void testContactCreation() {
+        List<ContactData> before = app.contact().list();
         ContactData contactData = new ContactData("Vladislav", "Artyomenko", "Moscow", "+79999999999", "javaCourse@test.ru");
-        app.getContactHelper().initContactCreation();
+        app.contact().initContactCreation();
         checkForGroupToExist();
-        app.getContactHelper().createContact(contactData);
-        app.getContactHelper().checkerForContactExists(contactData);
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().createContact(contactData);
+        app.contact().checkerForContactExists(contactData);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(contactData);
@@ -29,10 +29,10 @@ public class ContactCreationTests extends BaseTest {
     }
 
     public void checkForGroupToExist(){
-    if (!app.getGroupHelper().isThereAnyGroupInContactCreation()) {
-        app.getNavigationHelper().goToGroupPage();
-        app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
-        app.getContactHelper().initContactCreation();
+    if (!app.group().isThereAnyGroupInContactCreation()) {
+        app.goTo().groupPage();
+        app.group().create(new GroupData("test1", "test2", "test3"));
+        app.contact().initContactCreation();
         }
     }
 }

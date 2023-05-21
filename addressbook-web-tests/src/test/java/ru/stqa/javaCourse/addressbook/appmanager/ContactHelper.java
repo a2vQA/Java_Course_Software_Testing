@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
-import ru.stqa.javaCourse.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +66,12 @@ public class ContactHelper extends BaseHelper {
         returnToHomePage();
     }
 
+    public void modify(int index, ContactData changedContactData) {
+        initContactModification(index);
+        fillContactFormRequiredFields(changedContactData, false);
+        updateContactModification();
+    }
+
     public boolean isThereAnyContact() {
         return isElementPresent(By.xpath("(//img[last()][@title='Edit'])[1]"));
     }
@@ -79,7 +84,7 @@ public class ContactHelper extends BaseHelper {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.xpath("//*[@name='entry']"));
         for (WebElement element : elements) {

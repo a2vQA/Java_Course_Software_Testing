@@ -13,13 +13,13 @@ import static java.lang.String.format;
 public class GroupCreationTests extends BaseTest {
 
     @Test
-    public void testGroupCreation() throws Exception {
-        app.getNavigationHelper().goToGroupPage();
-        List<GroupData> before = app.getGroupHelper().getGroupList();
+    public void testGroupCreation() {
+        app.goTo().groupPage();
+        List<GroupData> before = app.group().list();
         GroupData groupData = new GroupData("test1", "test2", "test3");
-        app.getGroupHelper().createGroup(groupData);
+        app.group().create(groupData);
         app.wd.findElement(By.xpath(format("//span[text()='%s']", groupData.getName()))).isDisplayed();
-        List<GroupData> after = app.getGroupHelper().getGroupList();
+        List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         before.add(groupData);
