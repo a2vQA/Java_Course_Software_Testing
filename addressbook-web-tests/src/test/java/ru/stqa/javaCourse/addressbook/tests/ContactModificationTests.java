@@ -32,7 +32,7 @@ public class ContactModificationTests extends BaseTest {
     public void checkForContactAndGroupToExist(){
         if (app.contact().list().size() == 0){
             app.goTo().groupPage();
-            if (app.group().list().size() == 0){
+            if (app.group().all().size() == 0){
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().homePage();

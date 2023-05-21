@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupHelper extends BaseHelper {
 
@@ -36,6 +38,10 @@ public class GroupHelper extends BaseHelper {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void deleteSelectedGroups() {
         click(By.name("delete"));
     }
@@ -59,8 +65,8 @@ public class GroupHelper extends BaseHelper {
         returnToGroupPage();
     }
 
-    public void modify(int index, GroupData groupData) {
-        selectGroup(index);
+    public void modify(GroupData groupData) {
+        selectGroupById(groupData.getId());
         initGroupModification();
         fillGroupForm(groupData);
         submitGroupModification();
@@ -69,6 +75,12 @@ public class GroupHelper extends BaseHelper {
 
     public void delete(int index) {
         selectGroup(index);
+        deleteSelectedGroups();
+        returnToGroupPage();
+    }
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
         deleteSelectedGroups();
         returnToGroupPage();
     }
@@ -87,6 +99,17 @@ public class GroupHelper extends BaseHelper {
 
     public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(new By.ByCssSelector("span.group"));
+        for (WebElement element : elements) {
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withName(name).withId(id));
+        }
+        return groups;
+    }
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<>();
         List<WebElement> elements = wd.findElements(new By.ByCssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
