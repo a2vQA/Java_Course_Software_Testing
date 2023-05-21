@@ -31,7 +31,7 @@ public class ContactCreationTests extends BaseTest {
     public void checkForGroupToExist(){
     if (!app.group().isThereAnyGroupInContactCreation()) {
         app.goTo().groupPage();
-        app.group().create(new GroupData("test1", "test2", "test3"));
+        app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
         app.contact().initContactCreation();
         }
     }

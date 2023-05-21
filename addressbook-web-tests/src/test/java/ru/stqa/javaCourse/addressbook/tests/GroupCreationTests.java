@@ -16,7 +16,7 @@ public class GroupCreationTests extends BaseTest {
     public void testGroupCreation() {
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
-        GroupData groupData = new GroupData("test1", "test2", "test3");
+        GroupData groupData = new GroupData().withName("test2");
         app.group().create(groupData);
         app.wd.findElement(By.xpath(format("//span[text()='%s']", groupData.getName()))).isDisplayed();
         List<GroupData> after = app.group().list();
