@@ -1,30 +1,27 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import ru.stqa.javaCourse.addressbook.model.Groups;
 
 import static java.lang.String.format;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends BaseTest {
 
     @Test
     public void testGroupCreation() {
         app.goTo().groupPage();
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData groupData = new GroupData().withName("test2");
         app.group().create(groupData);
         app.wd.findElement(By.xpath(format("//span[text()='%s']", groupData.getName()))).isDisplayed();
-        Set<GroupData> after = app.group().all();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        Groups after = app.group().all();
 
-        groupData.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-        before.add(groupData);
-        Assert.assertEquals(before, after);
+        assertThat(after.size(),equalTo(before.size() + 1));
+        assertThat(after,
+                equalTo(before.withAdded(groupData.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 }
