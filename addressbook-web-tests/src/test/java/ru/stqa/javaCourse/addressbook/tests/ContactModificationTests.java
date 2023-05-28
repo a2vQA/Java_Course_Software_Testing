@@ -1,6 +1,7 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
@@ -10,25 +11,7 @@ import java.util.List;
 
 public class ContactModificationTests extends BaseTest {
 
-    @Test
-    public void testContactModification() {
-        checkForContactAndGroupToExist();
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
-        ContactData changedContactData = new ContactData("VladislavModified", "ArtyomenkoModified",
-                "MoscowModified", "+79999999998", "javaCourseModified@test.ru", before.get(index).getId());
-        app.contact().modify(index, changedContactData);
-        app.goTo().homePage();
-        List<ContactData> after = app.contact().list();
-
-        before.remove(before.size() - 1);
-        before.add(changedContactData);
-        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
-    }
-
+    @BeforeMethod
     public void checkForContactAndGroupToExist(){
         if (app.contact().list().size() == 0){
             app.goTo().groupPage();
@@ -37,11 +20,28 @@ public class ContactModificationTests extends BaseTest {
             }
             app.goTo().homePage();
             app.contact().initContactCreation();
-            app.contact().createContact(new ContactData("Vladislav",
-                    "Artyomenko",
-                    "Moscow",
-                    "+79999999999",
-                    "javaCourse@test.ru"));
+            app.contact().createContact(new ContactData().withFirstName("Vladislav").withLastName("Artyomenko").withAddress("Moscow")
+                    .withMobilePhone("+79999999999").withPrimaryEmail("javaCourse@test.ru"));
         }
+    }
+
+    @Test
+    public void testContactModification() {
+        checkForContactAndGroupToExist();
+        List<ContactData> before = app.contact().list();
+        int index = before.size() - 1;
+        ContactData contactData = new ContactData().withFirstName("VladislavModified").withLastName("ArtyomenkoModified")
+                .withAddress("MoscowModified").withMobilePhone("+79999999998").withPrimaryEmail("javaCourseModified@test.ru")
+                .withId(before.get(index).getId());
+        app.contact().modify(index, contactData);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
+
+        before.remove(before.size() - 1);
+        before.add(contactData);
+        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(before, after);
     }
 }
