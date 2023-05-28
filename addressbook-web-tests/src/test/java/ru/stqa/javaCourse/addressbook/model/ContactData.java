@@ -8,7 +8,13 @@ public class ContactData {
     private String lastName;
     private String address;
     private String mobilePhone;
+    private String workPhone;
+    private String homePhone;
+    private String allPhones;
     private String primaryEmail;
+    private String secondaryEmail;
+    private String thirdEmail;
+    private String allEmails;
 
     public String getFirstName() {
         return firstName;
@@ -25,9 +31,29 @@ public class ContactData {
     public String getMobilePhone() {
         return mobilePhone;
     }
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
 
     public String getPrimaryEmail() {
         return primaryEmail;
+    }
+    public String getSecondaryEmail() {
+        return secondaryEmail;
+    }
+    public String getThirdEmail() {
+        return thirdEmail;
+    }
+    public String getAllEmails() {
+        return allEmails;
     }
 
     public int getId() {
@@ -58,9 +84,38 @@ public class ContactData {
         this.mobilePhone = mobilePhone;
         return this;
     }
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
 
     public ContactData withPrimaryEmail(String primaryEmail) {
         this.primaryEmail = primaryEmail;
+        return this;
+    }
+
+    public ContactData withSecondaryEmail(String secondaryEmail) {
+        this.secondaryEmail = secondaryEmail;
+        return this;
+    }
+
+    public ContactData withThirdEmail(String thirdEmail) {
+        this.thirdEmail = thirdEmail;
+        return this;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
         return this;
     }
 

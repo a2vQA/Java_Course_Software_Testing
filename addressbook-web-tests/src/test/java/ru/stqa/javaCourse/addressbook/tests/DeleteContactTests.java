@@ -1,13 +1,10 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
 import ru.stqa.javaCourse.addressbook.model.Contacts;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
-
-import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
