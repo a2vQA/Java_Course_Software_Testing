@@ -8,12 +8,13 @@ import ru.stqa.javaCourse.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends BaseTest {
 
     @BeforeMethod
     public void checkForContactAndGroupToExist(){
-        if (app.contact().list().size() == 0){
+        if (app.contact().all().size() == 0){
             app.goTo().groupPage();
             if (app.group().all().size() == 0){
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
@@ -28,20 +29,16 @@ public class ContactModificationTests extends BaseTest {
     @Test
     public void testContactModification() {
         checkForContactAndGroupToExist();
-        List<ContactData> before = app.contact().list();
-        int index = before.size() - 1;
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
         ContactData contactData = new ContactData().withFirstName("VladislavModified").withLastName("ArtyomenkoModified")
                 .withAddress("MoscowModified").withMobilePhone("+79999999998").withPrimaryEmail("javaCourseModified@test.ru")
-                .withId(before.get(index).getId());
-        app.contact().modify(index, contactData);
-        app.goTo().homePage();
-        List<ContactData> after = app.contact().list();
+                .withId(modifiedContact.getId());
+        app.contact().modify(contactData);
+        Set<ContactData> after = app.contact().all();
 
-        before.remove(before.size() - 1);
+        before.remove(modifiedContact);
         before.add(contactData);
-        Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before, after);
     }
 }
