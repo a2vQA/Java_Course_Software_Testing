@@ -1,6 +1,7 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
@@ -39,6 +40,8 @@ public class ContactDataCompareTests extends BaseTest {
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+
+        app.contact().deleteContact(contact);
     }
 
     private String mergePhones(ContactData contact) {
