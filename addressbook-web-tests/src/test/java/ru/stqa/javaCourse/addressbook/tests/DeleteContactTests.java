@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
 
-import java.util.List;
 import java.util.Set;
 
 public class DeleteContactTests extends BaseTest {
