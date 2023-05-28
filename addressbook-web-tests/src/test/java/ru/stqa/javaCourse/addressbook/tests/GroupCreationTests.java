@@ -1,5 +1,7 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import org.openqa.selenium.By;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -19,15 +22,20 @@ public class GroupCreationTests extends BaseTest {
 
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
-        List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("./src/test/resources/groups.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("./src/test/resources/groups.xml")));
+        String xml = "";
         String line = reader.readLine();
         while (line != null){
-            String[] split = line.split(";");
-            list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+            xml += line;
             line = reader.readLine();
         }
-        return list.iterator();
+        XStream xstream = new XStream();
+        xstream.allowTypesByWildcard(new String[] {
+                "ru.stqa.javaCourse.addressbook.model.GroupData"
+        });
+        xstream.processAnnotations(GroupData.class);
+        List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
     @Test(dataProvider = "validGroups")
