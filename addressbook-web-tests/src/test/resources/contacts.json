@@ -1,0 +1,26 @@
+[
+  {
+    "firstName": "VladislavG 0",
+    "lastName": "ArtyomenkoG 0",
+    "address": "MoscowG 0",
+    "mobilePhone": "+79999999990",
+    "primaryEmail": "javaCourse@test.ruG 0",
+    "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
+  },
+  {
+    "firstName": "VladislavG 1",
+    "lastName": "ArtyomenkoG 1",
+    "address": "MoscowG 1",
+    "mobilePhone": "+79999999991",
+    "primaryEmail": "javaCourse@test.ruG 1",
+    "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
+  },
+  {
+    "firstName": "VladislavG 2",
+    "lastName": "ArtyomenkoG 2",
+    "address": "MoscowG 2",
+    "mobilePhone": "+79999999992",
+    "primaryEmail": "javaCourse@test.ruG 2",
+    "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
+  }
+]

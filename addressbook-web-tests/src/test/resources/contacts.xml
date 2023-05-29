@@ -1,0 +1,26 @@
+<list>
+  <contact>
+    <firstName>VladislavG 0</firstName>
+    <lastName>ArtyomenkoG 0</lastName>
+    <address>MoscowG 0</address>
+    <mobilePhone>+79999999990</mobilePhone>
+    <primaryEmail>javaCourse@test.ruG 0</primaryEmail>
+    <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
+  </contact>
+  <contact>
+    <firstName>VladislavG 1</firstName>
+    <lastName>ArtyomenkoG 1</lastName>
+    <address>MoscowG 1</address>
+    <mobilePhone>+79999999991</mobilePhone>
+    <primaryEmail>javaCourse@test.ruG 1</primaryEmail>
+    <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
+  </contact>
+  <contact>
+    <firstName>VladislavG 2</firstName>
+    <lastName>ArtyomenkoG 2</lastName>
+    <address>MoscowG 2</address>
+    <mobilePhone>+79999999992</mobilePhone>
+    <primaryEmail>javaCourse@test.ruG 2</primaryEmail>
+    <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
+  </contact>
+</list>

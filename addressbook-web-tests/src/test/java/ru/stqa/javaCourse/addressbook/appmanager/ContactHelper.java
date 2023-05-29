@@ -33,6 +33,7 @@ public class ContactHelper extends BaseHelper {
         type(By.name("email2"), contactData.getSecondaryEmail());
         type(By.name("email3"), contactData.getThirdEmail());
         attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("photo"), contactData.getPhotoPath());
 
         if(creation){
             new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);

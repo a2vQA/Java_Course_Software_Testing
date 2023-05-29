@@ -1,22 +1,36 @@
 package ru.stqa.javaCourse.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class ContactData {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private String address;
+    @Expose
     private String mobilePhone;
     private String workPhone;
     private String homePhone;
     private String allPhones;
+    @Expose
     private String primaryEmail;
     private String secondaryEmail;
     private String thirdEmail;
     private String allEmails;
     private File photo;
+    @Expose
+    private String photoPath = new File("src/test/resources/1.jpg").getAbsolutePath();
+
 
     public String getFirstName() {
         return firstName;
@@ -64,6 +78,10 @@ public class ContactData {
 
     public File getPhoto() {
         return photo;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
     }
 
     public ContactData withId(int id) {
@@ -127,6 +145,11 @@ public class ContactData {
 
     public ContactData withPhoto(File photo) {
         this.photo = photo;
+        return this;
+    }
+
+    public ContactData withPhotoPath() {
+        this.photoPath = photoPath;
         return this;
     }
 
