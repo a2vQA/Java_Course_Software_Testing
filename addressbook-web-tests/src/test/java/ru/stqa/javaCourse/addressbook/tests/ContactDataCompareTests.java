@@ -1,7 +1,5 @@
 package ru.stqa.javaCourse.addressbook.tests;
 
-import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
@@ -16,16 +14,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactDataCompareTests extends BaseTest {
 
     @BeforeMethod
-    public void checkForCertainContact(){
-        if (app.wd.findElements(By.xpath("//*[@name='entry']/td[contains(text(), 'CertainContact')]")).size() == 0){
+    public void checkForContactAndGroupToExist(){
+        if (app.contact().all().size() == 0){
             app.goTo().groupPage();
             if (app.group().all().size() == 0){
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().homePage();
             app.contact().initContactCreation();
-            app.contact().createContact(new ContactData().withFirstName("CertainContactFirstName")
-                    .withLastName("CertainContactLastName").withAddress("Moscow")
+            app.contact().createContact(new ContactData().withFirstName("Vladislav")
+                    .withLastName("Arryomenko").withAddress("Moscow")
                     .withMobilePhone("+7(999)9999999").withWorkPhone("99-99-99").withHomePhone("999999")
                     .withPrimaryEmail("javaCourse@test.ru").withSecondaryEmail("javaCourse2@test.ru").withThirdEmail("javaCourse3@test.ru"));
         }
