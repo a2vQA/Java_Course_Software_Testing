@@ -29,7 +29,7 @@ public class ContactData {
     private String allEmails;
     private File photo;
     @Expose
-    private String photoPath = new File("src/test/resources/1.jpg").getAbsolutePath();
+    private String photoPath = new File(System.getProperty("file.photo", "src/test/resources/1.jpg")).getAbsolutePath();
 
 
     public String getFirstName() {

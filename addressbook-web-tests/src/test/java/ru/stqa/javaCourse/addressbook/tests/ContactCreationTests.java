@@ -11,7 +11,6 @@ import ru.stqa.javaCourse.addressbook.model.Contacts;
 import ru.stqa.javaCourse.addressbook.model.GroupData;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -25,7 +24,8 @@ public class ContactCreationTests extends BaseTest {
 
     @DataProvider
     public Iterator<Object[]> validContactsFromXml() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("./src/test/resources/contacts.xml")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader
+                (System.getProperty("file.contactsXML", "./src/test/resources/contacts.xml")))) {
             String xml = "";
             String line = reader.readLine();
             while (line != null) {
@@ -44,7 +44,8 @@ public class ContactCreationTests extends BaseTest {
 
     @DataProvider
     public Iterator<Object[]> validContactsFromJson() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("./src/test/resources/contacts.json")))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader
+                (System.getProperty("file.contactsJSON", "./src/test/resources/contacts.json")))) {
             String json = "";
             String line = reader.readLine();
             while (line != null) {
