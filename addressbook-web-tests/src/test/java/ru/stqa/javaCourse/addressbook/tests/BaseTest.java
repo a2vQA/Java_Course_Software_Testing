@@ -5,12 +5,15 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.javaCourse.addressbook.appmanager.ApplicationManager;
 
+import java.io.IOException;
+
 public class BaseTest {
 
-    protected static final ApplicationManager app = new ApplicationManager(Browser.CHROME.browserName());
+    protected static final ApplicationManager app
+            = new ApplicationManager(System.getProperty("browser", Browser.CHROME.browserName()));
 
     @BeforeSuite(alwaysRun = true)
-    public void setUp() {
+    public void setUp() throws IOException {
         app.init();
     }
 
