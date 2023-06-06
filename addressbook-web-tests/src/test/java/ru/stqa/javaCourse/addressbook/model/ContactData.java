@@ -6,7 +6,9 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import jakarta.persistence.*;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -41,6 +43,10 @@ public class ContactData {
     private String allEmails;
     @Transient
     private File photo;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
     @Expose
     @Column(name = "photo", columnDefinition = "mediumtext")
     private String photoPath = new File(System.getProperty("file.photo", "src/test/resources/1.jpg")).getAbsolutePath();
@@ -98,6 +104,10 @@ public class ContactData {
 
     public String getPhotoPath() {
         return photoPath;
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public ContactData withId(int id) {
