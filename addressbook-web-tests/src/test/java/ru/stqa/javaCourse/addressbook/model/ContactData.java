@@ -3,13 +3,17 @@ package ru.stqa.javaCourse.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import jakarta.persistence.*;
 
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
     private int id = Integer.MAX_VALUE;
     @Expose
     private String firstName;
@@ -18,18 +22,30 @@ public class ContactData {
     @Expose
     private String address;
     @Expose
+    @Column(name = "mobile", columnDefinition = "text")
     private String mobilePhone;
+    @Column(name = "work", columnDefinition = "text")
     private String workPhone;
+    @Column(name = "home", columnDefinition = "text")
     private String homePhone;
+    @Transient
     private String allPhones;
     @Expose
+    @Column(name = "email")
     private String primaryEmail;
+    @Column(name = "email2")
     private String secondaryEmail;
+    @Column(name = "email3")
     private String thirdEmail;
+    @Transient
     private String allEmails;
+    @Transient
     private File photo;
     @Expose
+    @Column(name = "photo", columnDefinition = "mediumtext")
     private String photoPath = new File(System.getProperty("file.photo", "src/test/resources/1.jpg")).getAbsolutePath();
+    @Column(columnDefinition = "datetime")
+    private String deprecated;
 
 
     public String getFirstName() {
