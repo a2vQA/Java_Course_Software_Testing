@@ -14,9 +14,9 @@ public class ContactModificationTests extends BaseTest {
 
     @BeforeMethod
     public void checkForContactAndGroupToExist(){
-        if (app.contact().all().size() == 0){
+        if (app.db().contacts().size() == 0){
             app.goTo().groupPage();
-            if (app.group().all().size() == 0){
+            if (app.db().groups().size() == 0){
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().homePage();
@@ -29,15 +29,15 @@ public class ContactModificationTests extends BaseTest {
     @Test
     public void testContactModification() {
         checkForContactAndGroupToExist();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         ContactData contactData = new ContactData().withFirstName("VladislavModified").withLastName("ArtyomenkoModified")
                 .withAddress("MoscowModified").withMobilePhone("+79999999998").withPrimaryEmail("javaCourseModified@test.ru")
                 .withId(modifiedContact.getId());
         app.contact().modify(contactData);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertEquals(after.size(), before.size());
-        assertThat(after, equalTo(before.without(modifiedContact).withAdded(contactData)));
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(app.db().contacts().iterator().next())));
     }
 }

@@ -61,23 +61,20 @@ public class ContactCreationTests extends BaseTest {
 
     @BeforeMethod
     public void checkForGroupToExist(){
-        app.contact().initContactCreation();
-        if (!app.group().isThereAnyGroupInContactCreation()) {
+        if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
-            app.contact().initContactCreation();
         }
     }
 
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contactData) {
         app.goTo().homePage();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         app.contact().initContactCreation();
-        checkForGroupToExist();
         app.contact().createContact(contactData);
         app.contact().checkerForContactExists(contactData);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(before.withAdded(contactData.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));

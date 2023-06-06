@@ -61,13 +61,13 @@ public class GroupCreationTests extends BaseTest {
     @Test(dataProvider = "validGroupsFromJson")
     public void testGroupCreation(GroupData groupData) {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         app.group().create(groupData);
         app.wd.findElement(By.xpath(format("//span[text()='%s']", groupData.getName()))).isDisplayed();
 
         assertThat(app.group().count(), equalTo(before.size() + 1));
 
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         assertThat(after,
                 equalTo(before.withAdded(groupData.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
@@ -76,13 +76,13 @@ public class GroupCreationTests extends BaseTest {
     @Test
     public void testBadGroupCreation() {
         app.goTo().groupPage();
-        Groups before = app.group().all();
+        Groups before = app.db().groups();
         GroupData groupData = new GroupData().withName("test2'");
         app.group().create(groupData);
 
         assertThat(app.group().count(), equalTo(before.size()));
 
-        Groups after = app.group().all();
+        Groups after = app.db().groups();
 
         assertThat(after, equalTo(before));
     }

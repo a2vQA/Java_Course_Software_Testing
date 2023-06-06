@@ -14,9 +14,9 @@ public class DeleteContactTests extends BaseTest {
 
     @BeforeMethod
     public void checkForContactToExist(){
-        if (app.contact().all().size() == 0){
+        if (app.db().contacts().size() == 0){
             app.goTo().groupPage();
-            if (app.group().all().size() == 0){
+            if (app.db().groups().size() == 0){
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().homePage();
@@ -29,11 +29,11 @@ public class DeleteContactTests extends BaseTest {
     @Test
     public void testDeleteContact() {
         checkForContactToExist();
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.contact().deleteContact(deletedContact);
         app.goTo().homePage();
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertEquals(after.size(), before.size() - 1);
         assertThat(after, equalTo(before.without(deletedContact)));

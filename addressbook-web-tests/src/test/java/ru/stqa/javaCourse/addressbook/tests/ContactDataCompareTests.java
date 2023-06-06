@@ -15,15 +15,15 @@ public class ContactDataCompareTests extends BaseTest {
 
     @BeforeMethod
     public void checkForContactAndGroupToExist(){
-        if (app.contact().all().size() == 0){
-            app.goTo().groupPage();
-            if (app.group().all().size() == 0){
+        if (app.db().contacts().size() == 0){
+            if (app.db().groups().size() == 0){
+                app.goTo().groupPage();
                 app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.goTo().homePage();
             app.contact().initContactCreation();
             app.contact().createContact(new ContactData().withFirstName("Vladislav")
-                    .withLastName("Arryomenko").withAddress("Moscow")
+                    .withLastName("Artyomenko").withAddress("Moscow")
                     .withMobilePhone("+7(999)9999999").withWorkPhone("99-99-99").withHomePhone("999999")
                     .withPrimaryEmail("javaCourse@test.ru").withSecondaryEmail("javaCourse2@test.ru").withThirdEmail("javaCourse3@test.ru"));
         }
@@ -38,8 +38,6 @@ public class ContactDataCompareTests extends BaseTest {
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
-
-        app.contact().deleteContact(contact);
     }
 
     private String mergePhones(ContactData contact) {
