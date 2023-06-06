@@ -6,7 +6,7 @@ import ru.stqa.javaCourse.addressbook.model.Groups;
 
 import java.sql.*;
 
-public class DbConnectionTests {
+public class DbConnectionTest {
 
     @Test
     public void testDbConnection() {
