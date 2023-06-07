@@ -14,7 +14,9 @@ import java.util.Properties;
 public class ApplicationManager {
     private final String browser;
     private final Properties properties;
-    public WebDriver wd;
+    private WebDriver wd;
+    private RegistrationHelper registrationHelper;
+    private FtpHelper ftp;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -26,19 +28,12 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
-        if (browser.equals(Browser.CHROME.browserName())) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(Browser.FIREFOX.browserName())){
-            wd = new FirefoxDriver();
-        } else if (browser.equals(Browser.EDGE.browserName())){
-            wd = new EdgeDriver();
-        }
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
-        wd.get(properties.getProperty("web.baseUrl"));
     }
 
     public void stop() {
-        wd.quit();
+        if (wd != null) {
+            wd.quit();
+        }
     }
 
     public HttpSession newSession() {
@@ -47,5 +42,34 @@ public class ApplicationManager {
 
     public String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    public RegistrationHelper registration() {
+        if (registrationHelper == null) {
+            registrationHelper = new RegistrationHelper(this);
+        }
+        return registrationHelper;
+    }
+
+    public FtpHelper ftp() {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
+    public WebDriver getDriver() {
+        if (wd == null){
+            if (browser.equals(Browser.CHROME.browserName())) {
+                wd = new ChromeDriver();
+            } else if (browser.equals(Browser.FIREFOX.browserName())){
+                wd = new FirefoxDriver();
+            } else if (browser.equals(Browser.EDGE.browserName())){
+                wd = new EdgeDriver();
+            }
+            wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            wd.get(properties.getProperty("web.baseUrl"));
+        }
+        return wd;
     }
 }
