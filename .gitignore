@@ -9,6 +9,7 @@ native
 wrapper
 sandbox/out
 addressbook-web-tests/out
+mantis-tests/out
 
 # Ignore Gradle GUI config
 gradle-app.setting
