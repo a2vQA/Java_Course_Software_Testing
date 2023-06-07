@@ -10,6 +10,8 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 public class ChangePasswordTests extends BaseTest {
 
     @BeforeMethod
@@ -19,12 +21,14 @@ public class ChangePasswordTests extends BaseTest {
 
     @Test
     public void testChangePassword() throws IOException, MessagingException {
+        String user = "UserForChangingPassword";
+        String password = String.valueOf(System.currentTimeMillis());
         app.uiHelper().loginAsAdmin();
         String email = app.uiHelper().dropPasswordForUser();
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String resetLink = findResetLink(mailMessages, email);
-//        app.uiHelper().finishSettingNewPassword(resetLink);
-//        assertTrue(app.newSession().login(user, password));
+        app.uiHelper().setNewPassword(resetLink, password);
+        assertTrue(app.newSession().login(user, password));
 
     }
 

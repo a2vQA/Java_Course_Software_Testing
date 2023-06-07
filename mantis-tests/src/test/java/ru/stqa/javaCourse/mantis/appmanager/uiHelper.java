@@ -26,18 +26,10 @@ public class uiHelper extends BaseHelper {
         return email;
     }
 
-//    public void startSettingNewPassword(String username, String email) {
-//        wd.get(app.getProperty("web.baseUrl") + "/signup_page.php");
-//        type(By.name("username"), username);
-//        type(By.name("email"), email);
-//        click(By.cssSelector("input[type='submit']"));
-//    }
-//
-//    public void finishSettingNewPassword(String findResetLink) {
-//        wd.get(findResetLink);
-//        type(By.name("realname"), "TestUser");
-//        type(By.name("password"), "as");
-//        type(By.name("password_confirm"), "as");
-//        click(By.cssSelector("button[type='submit']"));
-//    }
+    public void setNewPassword(String resetLink, String password) {
+        wd.get(resetLink);
+        type(By.id("password"), password);
+        type(By.id("password-confirm"), password);
+        click(By.cssSelector("button[type='submit']"));
+    }
 }
