@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
+
 public class ApplicationManager {
     private final String browser;
     private final Properties properties;
@@ -18,10 +19,10 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private uiHelper uiHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
-
         properties = new Properties();
 
     }
@@ -50,6 +51,13 @@ public class ApplicationManager {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
+    }
+
+    public uiHelper uiHelper() {
+        if (uiHelper == null) {
+            uiHelper = new uiHelper(this);
+        }
+        return uiHelper;
     }
 
     public FtpHelper ftp() {
