@@ -197,11 +197,11 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData that = (ContactData) o;
-        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(mobilePhone, that.mobilePhone) && Objects.equals(primaryEmail, that.primaryEmail);
+        return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(mobilePhone, that.mobilePhone) && Objects.equals(workPhone, that.workPhone) && Objects.equals(homePhone, that.homePhone) && Objects.equals(primaryEmail, that.primaryEmail) && Objects.equals(secondaryEmail, that.secondaryEmail) && Objects.equals(thirdEmail, that.thirdEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, mobilePhone, primaryEmail);
+        return Objects.hash(id, firstName, lastName, address, mobilePhone, workPhone, homePhone, primaryEmail, secondaryEmail, thirdEmail);
     }
 }

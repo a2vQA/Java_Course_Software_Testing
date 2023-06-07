@@ -4,7 +4,11 @@
     "lastName": "ArtyomenkoG 0",
     "address": "MoscowG 0",
     "mobilePhone": "+79999999990",
+    "workPhone": "999990",
+    "homePhone": "888880",
     "primaryEmail": "javaCourse@test.ruG 0",
+    "secondaryEmail": "javaCourse2@test.ruG 0",
+    "thirdEmail": "javaCourse3@test.ruG 0",
     "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
   },
   {
@@ -12,7 +16,11 @@
     "lastName": "ArtyomenkoG 1",
     "address": "MoscowG 1",
     "mobilePhone": "+79999999991",
+    "workPhone": "999991",
+    "homePhone": "888881",
     "primaryEmail": "javaCourse@test.ruG 1",
+    "secondaryEmail": "javaCourse2@test.ruG 1",
+    "thirdEmail": "javaCourse3@test.ruG 1",
     "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
   },
   {
@@ -20,7 +28,11 @@
     "lastName": "ArtyomenkoG 2",
     "address": "MoscowG 2",
     "mobilePhone": "+79999999992",
+    "workPhone": "999992",
+    "homePhone": "888882",
     "primaryEmail": "javaCourse@test.ruG 2",
+    "secondaryEmail": "javaCourse2@test.ruG 2",
+    "thirdEmail": "javaCourse3@test.ruG 2",
     "photoPath": "C:\\javaCourse\\addressbook-web-tests\\src\\test\\resources\\1.jpg"
   }
 ]

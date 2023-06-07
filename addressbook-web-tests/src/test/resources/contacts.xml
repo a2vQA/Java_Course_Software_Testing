@@ -4,7 +4,12 @@
     <lastName>ArtyomenkoG 0</lastName>
     <address>MoscowG 0</address>
     <mobilePhone>+79999999990</mobilePhone>
+    <workPhone>999990</workPhone>
+    <homePhone>888880</homePhone>
     <primaryEmail>javaCourse@test.ruG 0</primaryEmail>
+    <secondaryEmail>javaCourse2@test.ruG 0</secondaryEmail>
+    <thirdEmail>javaCourse3@test.ruG 0</thirdEmail>
+    <groups/>
     <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
   </contact>
   <contact>
@@ -12,7 +17,12 @@
     <lastName>ArtyomenkoG 1</lastName>
     <address>MoscowG 1</address>
     <mobilePhone>+79999999991</mobilePhone>
+    <workPhone>999991</workPhone>
+    <homePhone>888881</homePhone>
     <primaryEmail>javaCourse@test.ruG 1</primaryEmail>
+    <secondaryEmail>javaCourse2@test.ruG 1</secondaryEmail>
+    <thirdEmail>javaCourse3@test.ruG 1</thirdEmail>
+    <groups/>
     <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
   </contact>
   <contact>
@@ -20,7 +30,12 @@
     <lastName>ArtyomenkoG 2</lastName>
     <address>MoscowG 2</address>
     <mobilePhone>+79999999992</mobilePhone>
+    <workPhone>999992</workPhone>
+    <homePhone>888882</homePhone>
     <primaryEmail>javaCourse@test.ruG 2</primaryEmail>
+    <secondaryEmail>javaCourse2@test.ruG 2</secondaryEmail>
+    <thirdEmail>javaCourse3@test.ruG 2</thirdEmail>
+    <groups/>
     <photoPath>C:\javaCourse\addressbook-web-tests\src\test\resources\1.jpg</photoPath>
   </contact>
 </list>

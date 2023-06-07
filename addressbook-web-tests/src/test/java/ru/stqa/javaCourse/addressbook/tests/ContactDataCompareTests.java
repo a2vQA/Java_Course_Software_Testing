@@ -22,9 +22,8 @@ public class ContactDataCompareTests extends BaseTest {
             }
             app.goTo().homePage();
             app.contact().initContactCreation();
-            app.contact().createContactWithGroup(new ContactData().withFirstName("Vladislav")
-                    .withLastName("Artyomenko").withAddress("Moscow")
-                    .withMobilePhone("+7(999)9999999").withWorkPhone("99-99-99").withHomePhone("999999")
+            app.contact().createContactWithGroup(new ContactData().withFirstName("Vladislav").withLastName("Artyomenko").withAddress("Moscow")
+                    .withMobilePhone("+79999999999").withHomePhone("999999").withWorkPhone("888888")
                     .withPrimaryEmail("javaCourse@test.ru").withSecondaryEmail("javaCourse2@test.ru").withThirdEmail("javaCourse3@test.ru"));
         }
     }
