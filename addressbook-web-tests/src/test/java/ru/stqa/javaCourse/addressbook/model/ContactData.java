@@ -53,7 +53,6 @@ public class ContactData {
     @Column(columnDefinition = "datetime")
     private String deprecated;
 
-
     public String getFirstName() {
         return firstName;
     }

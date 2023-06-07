@@ -72,7 +72,7 @@ public class ContactCreationTests extends BaseTest {
         app.goTo().homePage();
         Contacts before = app.db().contacts();
         app.contact().initContactCreation();
-        app.contact().createContact(contactData);
+        app.contact().createContactWithGroup(contactData);
         app.contact().checkerForContactExists(contactData);
         Contacts after = app.db().contacts();
 

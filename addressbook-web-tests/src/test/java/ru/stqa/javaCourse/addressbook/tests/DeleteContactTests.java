@@ -21,7 +21,7 @@ public class DeleteContactTests extends BaseTest {
             }
             app.goTo().homePage();
             app.contact().initContactCreation();
-            app.contact().createContact(new ContactData().withFirstName("Vladislav").withLastName("Artyomenko").withAddress("Moscow")
+            app.contact().createContactWithGroup(new ContactData().withFirstName("Vladislav").withLastName("Artyomenko").withAddress("Moscow")
                     .withMobilePhone("+79999999999").withPrimaryEmail("javaCourse@test.ru"));
         }
     }

@@ -42,6 +42,20 @@ public class ContactHelper extends BaseHelper {
         }
     }
 
+    public void fillContactFormWithoutGroup(ContactData contactData) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
+        type(By.name("email"), contactData.getPrimaryEmail());
+        type(By.name("email2"), contactData.getSecondaryEmail());
+        type(By.name("email3"), contactData.getThirdEmail());
+        attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("photo"), contactData.getPhotoPath());
+    }
+
     public void submitContactCreation() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
@@ -71,8 +85,14 @@ public class ContactHelper extends BaseHelper {
         deleteContactBtn();
     }
 
-    public void createContact(ContactData contactData) {
+    public void createContactWithGroup(ContactData contactData) {
         fillContactForm(contactData, true);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public void createContactWithoutGroup(ContactData contactData) {
+        fillContactFormWithoutGroup(contactData);
         submitContactCreation();
         returnToHomePage();
     }
@@ -123,5 +143,13 @@ public class ContactHelper extends BaseHelper {
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
                 .withAddress(address).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withPrimaryEmail(email).withSecondaryEmail(email2).withThirdEmail(email3);
+    }
+
+    public void activateContactCheckbox(int id) {
+        click(By.xpath(format("//input[@type='checkbox']/../input[@id='%d']", id)));
+    }
+
+    public void addToGroupButton() {
+        click(By.xpath("//input[@type='submit']"));
     }
 }
