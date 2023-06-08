@@ -3,7 +3,6 @@ package ru.stqa.javaCourse.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javaCourse.addressbook.model.ContactData;
-import ru.stqa.javaCourse.addressbook.model.GroupData;
 
 public class AddContactInGroupTests extends BaseTest {
 
@@ -13,12 +12,12 @@ public class AddContactInGroupTests extends BaseTest {
                 app.goTo().homePage();
                 app.contact().initContactCreation();
                 app.contact().createContactWithoutGroup(new ContactData().withFirstName("Vladislav").withLastName("Artyomenko").withAddress("Moscow")
-                        .withMobilePhone("+79999999999").withPrimaryEmail("javaCourse@test.ru"));
+                        .withMobilePhone("+79999999999").withHomePhone("999999").withWorkPhone("888888")
+                        .withPrimaryEmail("javaCourse@test.ru").withSecondaryEmail("javaCourse2@test.ru").withThirdEmail("javaCourse3@test.ru"));
         }
-        app.goTo().groupPage();
-        app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
-        GroupData group = app.db().groups().iterator().next();
-        int newGroupId = group.getId();
+//        app.goTo().groupPage();
+//        app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
+//        GroupData group = app.db().groups().iterator().next();
     }
 
     @Test
