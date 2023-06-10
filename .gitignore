@@ -10,6 +10,8 @@ wrapper
 sandbox/out
 addressbook-web-tests/out
 mantis-tests/out
+soap-sample/out
+rest-sample/out
 
 # Ignore Gradle GUI config
 gradle-app.setting
