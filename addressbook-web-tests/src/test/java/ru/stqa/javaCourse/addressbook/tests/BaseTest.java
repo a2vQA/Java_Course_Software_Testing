@@ -41,12 +41,12 @@ public class BaseTest {
     }
 
     public void verifyContactListInUI() {
-//        if (Boolean.getBoolean("verifyUI")) {
+        if (Boolean.getBoolean("verifyUI")) {
             Contacts dbContacts = app.db().contacts();
             Contacts uiContacts = app.contact().all();
             assertThat(uiContacts, equalTo(dbContacts.stream()
                     .map((g) -> new ContactData().withId(g.getId()).withFirstName(g.getFirstName()).withLastName(g.getLastName()).withAddress(g.getAddress()))
                     .collect(Collectors.toSet())));
         }
-//    }
+    }
 }

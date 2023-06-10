@@ -149,7 +149,31 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath(format("//input[@type='checkbox']/../input[@id='%d']", id)));
     }
 
+    public void chooseTheGroupInAddDropDownById(int groupId){
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(format("%d", groupId));
+    }
+
+    public void chooseTheGroupInGroupDropDownById(int groupId){
+        new Select(wd.findElement(By.name("group"))).selectByValue(format("%d", groupId));
+    }
+
     public void addToGroupButton() {
         click(By.xpath("//input[@type='submit']"));
+    }
+
+    public void deleteFromGroupButton() {
+        click(By.name("group"));
+    }
+
+    public void addToGroup(int contactId, int groupId) {
+        activateContactCheckbox(contactId);
+        chooseTheGroupInAddDropDownById(groupId);
+        addToGroupButton();
+    }
+
+    public void deleteFromGroup(int groupId, int contactId) {
+        chooseTheGroupInGroupDropDownById(groupId);
+        activateContactCheckbox(contactId);
+        deleteFromGroupButton();
     }
 }
