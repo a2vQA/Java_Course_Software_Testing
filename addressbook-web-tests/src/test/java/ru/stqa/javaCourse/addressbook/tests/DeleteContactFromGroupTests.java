@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
-import static ru.stqa.javaCourse.addressbook.tests.BaseTest.app;
 
-public class DeleteContactFromGroupTests {
+public class DeleteContactFromGroupTests extends BaseTest {
 
     @BeforeMethod
     public void doPreconditions(){
@@ -45,8 +44,8 @@ public class DeleteContactFromGroupTests {
         Groups groupsBeforeDeletion = contact.getGroups();
         int groupId = contact.getGroups().iterator().next().getId();
         app.contact().deleteFromGroup(groupId, contact.getId());
-//        ContactData contact = app.db().contacts().iterator().next();
-        Groups groupsAfterDeletion = contact.getGroups();
+        ContactData freshDataContact = app.db().contacts().iterator().next();
+        Groups groupsAfterDeletion = freshDataContact.getGroups();
 
         assertEquals(groupsBeforeDeletion.size() - 1, groupsAfterDeletion.size());
     }

@@ -162,7 +162,7 @@ public class ContactHelper extends BaseHelper {
     }
 
     public void deleteFromGroupButton() {
-        click(By.name("group"));
+        click(By.name("remove"));
     }
 
     public void addToGroup(int contactId, int groupId) {
