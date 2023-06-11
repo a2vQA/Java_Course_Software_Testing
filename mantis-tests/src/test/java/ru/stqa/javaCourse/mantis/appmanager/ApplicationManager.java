@@ -21,6 +21,7 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     private uiHelper uiHelper;
     private SoapHelper soapHelper;
+    private RestHelper restHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -95,5 +96,12 @@ public class ApplicationManager {
             soapHelper = new SoapHelper(this);
         }
         return soapHelper;
+    }
+
+    public RestHelper rest() {
+        if (restHelper == null) {
+            restHelper = new RestHelper(this);
+        }
+        return restHelper;
     }
 }

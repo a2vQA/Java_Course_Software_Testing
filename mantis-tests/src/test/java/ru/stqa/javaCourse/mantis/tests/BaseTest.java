@@ -30,13 +30,24 @@ public class BaseTest {
         app.ftp().restore("config/config_inc.php.backup", "config/config_inc.php");
     }
 
-    boolean isIssueOpen(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+    boolean isIssueOpenMantis(int issueId) throws MalformedURLException, ServiceException, RemoteException {
         String status = app.soap().getIssueResolutionName(BigInteger.valueOf(issueId));
         return status.equals("open");
     }
 
-    public void skipIfNotFixed(int issueId) throws MalformedURLException, ServiceException, RemoteException {
-        if (isIssueOpen(issueId)) {
+    public void skipIfNotFixedMantis(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+        if (isIssueOpenMantis(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
+    }
+
+    boolean isIssueOpenBugify(int issueId) {
+        String status = app.rest().getSpecificIssueState(issueId);
+        return status.equals("Open");
+    }
+
+    public void skipIfNotFixedBugify(int issueId) {
+        if (isIssueOpenBugify(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
     }

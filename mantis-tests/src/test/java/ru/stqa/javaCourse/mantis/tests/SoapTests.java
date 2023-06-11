@@ -2,7 +2,7 @@ package ru.stqa.javaCourse.mantis.tests;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.stqa.javaCourse.mantis.model.Issue;
+import ru.stqa.javaCourse.mantis.model.IssueMantis;
 import ru.stqa.javaCourse.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
@@ -16,7 +16,7 @@ public class SoapTests extends BaseTest {
 
     @BeforeClass
     public void checkForIssue() throws MalformedURLException, ServiceException, RemoteException {
-        skipIfNotFixed(2);
+        skipIfNotFixedMantis(2);
     }
 
     @Test
@@ -31,11 +31,11 @@ public class SoapTests extends BaseTest {
     @Test
     public void testCreateIssue() throws MalformedURLException, ServiceException, RemoteException {
         Set<Project> projects = app.soap().getProjects();
-        Issue issue = new Issue()
+        IssueMantis issue = new IssueMantis()
                 .withSummary("VA Test issue")
                 .withDescription("VA Test issue description")
                 .withProject(projects.iterator().next());
-        Issue created = app.soap().addIssue(issue);
+        IssueMantis created = app.soap().addIssue(issue);
         assertEquals(issue.getSummary(), created.getSummary());
     }
 }
