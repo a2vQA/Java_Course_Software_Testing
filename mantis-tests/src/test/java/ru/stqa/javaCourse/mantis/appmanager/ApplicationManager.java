@@ -22,11 +22,12 @@ public class ApplicationManager {
     private uiHelper uiHelper;
     private SoapHelper soapHelper;
     private RestHelper restHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+        dbHelper = new DbHelper();
         properties = new Properties();
-
     }
 
     public void init() throws IOException {
@@ -103,5 +104,9 @@ public class ApplicationManager {
             restHelper = new RestHelper(this);
         }
         return restHelper;
+    }
+
+    public DbHelper db() {
+        return dbHelper;
     }
 }

@@ -1,10 +1,17 @@
 package ru.stqa.javaCourse.mantis.tests;
 
+import com.google.common.collect.ImmutableList;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.javaCourse.mantis.model.MailMessage;
+import ru.stqa.javaCourse.mantis.model.UsersData;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -14,6 +21,25 @@ import static org.testng.AssertJUnit.assertTrue;
 
 public class ChangePasswordTests extends BaseTest {
 
+    private SessionFactory sessionFactory;
+
+    @BeforeClass
+    public void setUp() {
+        // A SessionFactory is set up once for an application!
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure() // configures settings from hibernate.cfg.xml
+                .build();
+        try {
+            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
+            // so destroy it manually.
+            StandardServiceRegistryBuilder.destroy( registry );
+        }
+    }
+
     @BeforeMethod
     public void startMailServer() {
         app.mail().start();
@@ -21,14 +47,16 @@ public class ChangePasswordTests extends BaseTest {
 
     @Test
     public void testChangePassword() throws IOException, MessagingException {
-        String user = "UserForChangingPassword";
+        List<UsersData> users = app.db().users();
+        List<UsersData> reversed = ImmutableList.copyOf(users).reverse();
+        UsersData user = reversed.iterator().next();
         String password = String.valueOf(System.currentTimeMillis());
         app.uiHelper().loginAsAdmin();
         String email = app.uiHelper().dropPasswordForUser();
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String resetLink = findResetLink(mailMessages, email);
         app.uiHelper().setNewPassword(resetLink, password);
-        assertTrue(app.newSession().login(user, password));
+        assertTrue(app.newSession().login(user.getUsername(), password));
 
     }
 
