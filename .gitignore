@@ -12,6 +12,7 @@ addressbook-web-tests/out
 mantis-tests/out
 soap-sample/out
 rest-sample/out
+jenkins.war
 
 # Ignore Gradle GUI config
 gradle-app.setting

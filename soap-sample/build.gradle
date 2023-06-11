@@ -1,28 +1,35 @@
+buildscript{
+    repositories{
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'com.yupzip:wsdl2java:2.3.2'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'com.yupzip.wsdl2java'
+
 
 repositories {
     mavenCentral()
 }
-
 dependencies {
-    implementation 'org.testng:testng:7.7.0'
+    implementation 'org.testng:testng:7.6.1'
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    implementation "jakarta.xml.ws:jakarta.xml.ws-api:4.0.0"
+    implementation "com.sun.xml.ws:jaxws-rt:4.0.1"
 }
-
-buildscript{
-    repositories{
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'no.nils:wsdl2java:0.9'
-    }
-}
-apply plugin: 'no.nils.wsdl2java'
 
 wsdl2java {
-    generatedWsdlDir = file("src/main/java")  // target directory for generated source coude
-    wsdlDir = file("src/main/resources") // define to support incremental build
-    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                          ['src/main/resources/geoservice.wsdl'],
+    generatedWsdlDir = file("src/main/java")
+    wsdlDir = file("src/main/resources")
+    wsdlsToGenerate = [
+            ["$projectDir/src/main/resources/geoservice.wsdl"]
     ]
+}
+
+test {
+    useTestNG()
 }
