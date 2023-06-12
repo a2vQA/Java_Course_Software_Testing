@@ -32,7 +32,7 @@ public class BaseTest {
 
     boolean isIssueOpenMantis(int issueId) throws MalformedURLException, ServiceException, RemoteException {
         String status = app.soap().getIssueResolutionName(BigInteger.valueOf(issueId));
-        return status.equals("open");
+        return status.equals("open") || status.equals("reopened");
     }
 
     public void skipIfNotFixedMantis(int issueId) throws MalformedURLException, ServiceException, RemoteException {
@@ -43,7 +43,7 @@ public class BaseTest {
 
     boolean isIssueOpenBugify(int issueId) {
         String status = app.rest().getSpecificIssueState(issueId);
-        return status.equals("Open");
+        return status.equals("Open") || status.equals("In Progress");
     }
 
     public void skipIfNotFixedBugify(int issueId) {
