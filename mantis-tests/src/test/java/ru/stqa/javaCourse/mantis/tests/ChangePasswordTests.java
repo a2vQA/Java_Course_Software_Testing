@@ -47,12 +47,11 @@ public class ChangePasswordTests extends BaseTest {
 
     @Test
     public void testChangePassword() throws IOException, MessagingException {
-        List<UsersData> users = app.db().users();
-        List<UsersData> reversed = ImmutableList.copyOf(users).reverse();
-        UsersData user = reversed.iterator().next();
+        List<UsersData> reversedUsers = ImmutableList.copyOf(app.db().users()).reverse();
+        UsersData user = reversedUsers.iterator().next();
         String password = String.valueOf(System.currentTimeMillis());
         app.uiHelper().loginAsAdmin();
-        String email = app.uiHelper().dropPasswordForUser();
+        String email = app.uiHelper().dropPasswordForUser(user.getUsername());
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
         String resetLink = findResetLink(mailMessages, email);
         app.uiHelper().setNewPassword(resetLink, password);

@@ -2,9 +2,11 @@ package ru.stqa.javaCourse.mantis.appmanager;
 
 import org.openqa.selenium.By;
 
+import java.io.IOException;
+
 public class RegistrationHelper extends BaseHelper {
 
-    public RegistrationHelper(ApplicationManager app) {
+    public RegistrationHelper(ApplicationManager app) throws IOException {
         super(app);
         wd = app.getDriver();
     }

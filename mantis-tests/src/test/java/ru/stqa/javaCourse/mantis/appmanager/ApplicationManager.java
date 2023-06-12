@@ -49,14 +49,14 @@ public class ApplicationManager {
         return properties.getProperty(key);
     }
 
-    public RegistrationHelper registration() {
+    public RegistrationHelper registration() throws IOException {
         if (registrationHelper == null) {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
     }
 
-    public uiHelper uiHelper() {
+    public uiHelper uiHelper() throws IOException {
         if (uiHelper == null) {
             uiHelper = new uiHelper(this);
         }
@@ -70,7 +70,7 @@ public class ApplicationManager {
         return ftp;
     }
 
-    public WebDriver getDriver() {
+    public WebDriver getDriver() throws IOException {
         if (wd == null){
             if (browser.equals(Browser.CHROME.browserName())) {
                 wd = new ChromeDriver();
@@ -80,6 +80,7 @@ public class ApplicationManager {
                 wd = new EdgeDriver();
             }
             wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+            init();
             wd.get(properties.getProperty("web.baseUrl"));
         }
         return wd;

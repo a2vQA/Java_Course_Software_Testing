@@ -2,9 +2,13 @@ package ru.stqa.javaCourse.mantis.appmanager;
 
 import org.openqa.selenium.By;
 
+import java.io.IOException;
+
+import static java.lang.String.format;
+
 public class uiHelper extends BaseHelper {
 
-    public uiHelper(ApplicationManager app) {
+    public uiHelper(ApplicationManager app) throws IOException {
         super(app);
         wd = app.getDriver();
     }
@@ -17,10 +21,10 @@ public class uiHelper extends BaseHelper {
         click(By.cssSelector("input[type='submit']"));
     }
 
-    public String dropPasswordForUser() {
-        click(By.xpath("(//span[@class='menu-text'])[6]"));
+    public String dropPasswordForUser(String username) {
+        click(By.xpath("(//span[@class='menu-text'])[7]"));
         click(By.xpath("(//li[@class])[9]"));
-        click(By.xpath("//a[text()='UserForChangingPassword']"));
+        click(By.xpath(format("//a[text()='%s']" , username)));
         String email = wd.findElement(By.xpath("//input[@id='email-field']")).getAttribute("value");
         click(By.xpath("(//input[@type='submit'])[2]"));
         return email;
