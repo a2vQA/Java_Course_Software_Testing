@@ -13,6 +13,7 @@ mantis-tests/out
 soap-sample/out
 rest-sample/out
 jenkins.war
+!gradle-wrapper.jar
 
 # Ignore Gradle GUI config
 gradle-app.setting
