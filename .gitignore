@@ -6,7 +6,7 @@ caches
 daemon
 jdks
 native
-wrapper
+wrapper/dists
 sandbox/out
 addressbook-web-tests/out
 mantis-tests/out
